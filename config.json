@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "baseDirectory": "./content",
+  "outputDirectory": "./docs/api",
+  "stores": {
+    "processed": "./docs/api/processed.json",
+    "index": "./docs/api/index.json",
+    "openapi": "./docs/api/openapi.json",
+    "collections": "./docs/api/collections.json"
+  },
+  "transformers": {
+    ".md": "./transformers/md.js",
+    ".jpeg": "./transformers/image.js",
+    ".jpg": "./transformers/image.js",
+    ".png": "./transformers/image.js",
+    ".gif": "./transformers/image.js"
+  },
+  "media": {
+    "maxSize": 1920
+  },
+  "spec": {
+    "openapi": "3.0.1",
+    "info": {
+      "title": "COPE Static API",
+      "description": "A Create Once, Publish Everywhere Static API.\n\nContent is written in Markdown and served as JSON, along with optimized media and a comprehensive index.\n\nMinimizes vendor lock-in, dependencies, and hosting requirements. Apt for hosting on GitHub or GitLab Pages, or any static service.",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://olevik.github.io/cope-static-api/api"
+      }
+    ]
+  },
+  "logplease": {
+    "showLevel": true,
+    "filename": "operations.log",
+    "appendFile": true
+  }
+}
