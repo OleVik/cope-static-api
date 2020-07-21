@@ -64,9 +64,9 @@ Your Content Management System, Static Site Generator, or other consumer of cont
 
 ### Transformers
 
-A Transformer is any module which exports a default function that can be used to manipulate a file. The function most accept two parameters: First, the path to the source file, and second, the path to the output file. The module itself is responsible for reading and manipulating the file, as well as storing it in the given location.
+A Transformer is any module which exports a default function that can be used to manipulate a file. The function must accept two parameters: First, the path to the source file, and second, the path to the output file. The module itself is responsible for reading and manipulating the file, as well as storing it in the given location.
 
-This project is agnostic about how files are treated, and will in every instance pass the source- and target-paths to the module or script defined in `config.json`. By default this includes transforming Markdown-files with FrontMatter into JSON, as well as optimizing and resizing images.
+This project is agnostic about how files are treated, and will in every instance pass the source- and target-paths to the module or script defined for each file-type in `config.json`. By default this includes transforming Markdown-files with FrontMatter into JSON, as well as optimizing and resizing images.
 
 ## License
 
