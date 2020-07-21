@@ -15,15 +15,15 @@ if (
   process.exit(1);
 }
 
-const contents = WalkSync(Config.outputDirectory);
+const contents = WalkSync(`${Config.outputDirectory}/content`);
 var data = { index: "index.json", spec: "openapi.json", content: [] };
 contents.forEach((item) => {
-  if (!Filesystem.existsSync(`${Config.outputDirectory}/${item}`)) {
-    logger.warn(`${Config.outputDirectory}/${item} does not exist`);
+  if (!Filesystem.existsSync(`${Config.outputDirectory}/content/${item}`)) {
+    logger.warn(`${Config.outputDirectory}/content/${item} does not exist`);
     return;
   }
   const Stats = Filesystem.statSync(
-    Path.resolve(process.cwd(), `${Config.outputDirectory}/${item}`)
+    Path.resolve(process.cwd(), `${Config.outputDirectory}/content/${item}`)
   );
   if (Stats.isFile()) {
     data.content.push(item);
@@ -42,8 +42,8 @@ Filesystem.writeFile(Config.stores.index, JSON.stringify(data), function (
     throw error;
   }
   logger.info(
-    `Wrote ${data.length} items to ${Config.stores.index} in ${Util.msToTime(
-      performance.now() - start
-    )}`
+    `Wrote ${data.content.length} items to ${
+      Config.stores.index
+    } in ${Util.msToTime(performance.now() - start)}`
   );
 });

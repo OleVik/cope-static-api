@@ -61,7 +61,10 @@ if (data.length < 1) {
 let Spec = Config.spec;
 Spec.paths = {};
 data.content.forEach((item) => {
-  Spec.paths[`/${item}`] = operation(`${Config.outputDirectory}/${item}`, item);
+  Spec.paths[`/content/${item}`] = operation(
+    `${Config.outputDirectory}/content/${item}`,
+    item
+  );
 });
 
 Filesystem.writeFile(Config.stores.openapi, JSON.stringify(Spec), function (

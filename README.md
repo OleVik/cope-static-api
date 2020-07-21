@@ -48,14 +48,25 @@ Edit `config.json` and set:
 
 ## Usage
 
-Fork the repository, edit Pages in `/content`, and run
+Fork the repository, edit pages in `/content`, and run
 
 ```bash
 npm run build
-npm run redoc
 ```
 
 The `/docs`-folder is now populated with all your content and media, as well as documentation. Set your [repository's settings to publish to GitHub.io from /docs](https://docs.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) on the master-branch.
+
+### Consuming
+
+Your Content Management System, Static Site Generator, or other consumer of content can source all content from `/api/index.json`, which references itself, the OpenAPI-spec, as well as all content in the `content`-property.
+
+## Development
+
+### Transformers
+
+A Transformer is any module which exports a default function that can be used to manipulate a file. The function most accept two parameters: First, the path to the source file, and second, the path to the output file. The module itself is responsible for reading and manipulating the file, as well as storing it in the given location.
+
+This project is agnostic about how files are treated, and will in every instance pass the source- and target-paths to the module or script defined in `config.json`. By default this includes transforming Markdown-files with FrontMatter into JSON, as well as optimizing and resizing images.
 
 ## License
 
