@@ -6,8 +6,6 @@ const Filesystem = require("graceful-fs");
 const Path = require("path");
 const { isBinaryFileSync } = require("isbinaryfile");
 const mime = require("mime");
-const Merge = require("deepmerge");
-const { OpenApiSpecBuilder } = require("@loopback/openapi-spec-builder");
 const Logger = require("logplease");
 const logger = Logger.create("OpenAPI", Config.logplease);
 
@@ -49,7 +47,7 @@ if (!Filesystem.existsSync(Path.resolve(process.cwd(), Config.stores.index))) {
   process.exit(1);
 }
 
-var data = JSON.parse(
+const data = JSON.parse(
   Filesystem.readFileSync(Path.resolve(process.cwd(), Config.stores.index), {
     encoding: "utf8",
     flag: "r",
@@ -59,36 +57,12 @@ if (data.length < 1) {
   logger.error(`No Index to iterate`);
   process.exit(1);
 }
-// data = data.slice(0, 10);
-
-// let Spec = new OpenApiSpecBuilder();
-// data.forEach((item) => {
-//   Spec.withOperation(
-//     "get",
-//     `/${item}`,
-//     response(
-//       mime.getType(item),
-//       "string",
-//       isBinaryFileSync(
-//         Path.resolve(process.cwd(), `${Config.outputDirectory}/${item}`)
-//       )
-//     )
-//   );
-//   console.log(item);
-// });
-// Spec = Spec.build();
-
-// delete Spec.servers;
-// Spec = Merge(Spec, Config.spec);
 
 let Spec = Config.spec;
 Spec.paths = {};
-data.forEach((item) => {
+data.content.forEach((item) => {
   Spec.paths[`/${item}`] = operation(`${Config.outputDirectory}/${item}`, item);
 });
-
-// console.log(require("util").inspect(Spec, false, null, true));
-// return;
 
 Filesystem.writeFile(Config.stores.openapi, JSON.stringify(Spec), function (
   error
@@ -97,8 +71,8 @@ Filesystem.writeFile(Config.stores.openapi, JSON.stringify(Spec), function (
     throw error;
   }
   logger.info(
-    `Wrote ${data.length} items to ${Config.stores.openapi} in ${Util.msToTime(
-      performance.now() - start
-    )}`
+    `Wrote ${data.content.length} items to ${
+      Config.stores.openapi
+    } in ${Util.msToTime(performance.now() - start)}`
   );
 });

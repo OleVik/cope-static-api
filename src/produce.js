@@ -44,7 +44,7 @@ data.forEach((item) => {
   const filename = Path.basename(item.path);
   let target = Path.resolve(
     process.cwd(),
-    `${Config.outputDirectory}/${item.path}`
+    `${Config.outputDirectory}/content/${item.path}`
   );
   const Stats = Filesystem.statSync(source);
   if (Stats.isDirectory()) {

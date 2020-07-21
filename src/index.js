@@ -16,7 +16,7 @@ if (
 }
 
 const contents = WalkSync(Config.outputDirectory);
-var data = new Set().add("index.json").add("processed.json");
+var data = { index: "index.json", spec: "openapi.json", content: [] };
 contents.forEach((item) => {
   if (!Filesystem.existsSync(`${Config.outputDirectory}/${item}`)) {
     logger.warn(`${Config.outputDirectory}/${item} does not exist`);
@@ -26,11 +26,9 @@ contents.forEach((item) => {
     Path.resolve(process.cwd(), `${Config.outputDirectory}/${item}`)
   );
   if (Stats.isFile()) {
-    data.add(item);
+    data.content.push(item);
   }
 });
-
-data = Array.from(data);
 
 if (data.length < 1) {
   logger.error(`No data to write`);

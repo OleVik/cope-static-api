@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "baseDirectory": "./content",
   "outputDirectory": "./docs/api",
   "stores": {
@@ -9,7 +9,7 @@
     "collections": "./docs/api/collections.json"
   },
   "transformers": {
-    ".md": "./transformers/md.js",
+    ".md": "./transformers/markdown.js",
     ".jpeg": "./transformers/image.js",
     ".jpg": "./transformers/image.js",
     ".png": "./transformers/image.js",
