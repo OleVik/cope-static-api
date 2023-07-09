@@ -1,6 +1,6 @@
 # COPE Static REST API
 
-A static REST API based on the [Create Once, Publish Everywhere (COPE)](https://www.programmableweb.com/news/cope-create-once-publish-everywhere/2009/10/13) principle.
+A static REST API based on the [Create Once, Publish Everywhere (COPE)](https://web.archive.org/web/20170522060044/https://www.programmableweb.com/news/cope-create-once-publish-everywhere/2009/10/13) principle.
 
 Content is written in Markdown and served as JSON, along with optimized media and a comprehensive index. Minimizes vendor lock-in, dependencies, and hosting requirements. Apt for hosting on GitHub or GitLab Pages, or any static service.
 
